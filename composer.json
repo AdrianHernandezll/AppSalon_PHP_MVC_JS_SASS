@@ -1,0 +1,23 @@
+{
+    "name": "adrianhernandez/app-salon-php-mvc-sass-s",
+    "description": "Proyecto PHP 8,MVC,SQL,SASS,Gulp",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models",
+            "Classes\\" : "./classes"
+
+        }
+    },
+    "authors": [
+        {
+            "name": "Adrian Hernandez",
+            "email": "danix08@live.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.8"
+    }
+}

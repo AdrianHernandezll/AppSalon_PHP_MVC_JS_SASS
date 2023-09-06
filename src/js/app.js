@@ -225,7 +225,9 @@ function seleccionarHora(){
 function mostrarAlerta(mensaje, tipo, elemento, desaparece = true){
   //Previene clonacion de alerta
   const alertaPrevia = document.querySelector('.alerta');
-  if(alertaPrevia) return;
+  if(alertaPrevia){
+    alertaPrevia.remove();
+  }
 
   const alerta = document.createElement('DIV');
   alerta.textContent = mensaje;
@@ -250,7 +252,7 @@ function mostrarResumen(){
 
     if(Object.values(cita).includes("") || cita.servicios.length === 0){
 
-      mostrarAlerta('Faltan datos de Servicios, Fecha u Hora','error','.contenido-resumen')
+      mostrarAlerta('Faltan datos de Servicios, Fecha u Hora','error','.contenido-resumen', desaparece = false)
     }else{
       console.log('Todo bien')
     }

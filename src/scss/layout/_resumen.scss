@@ -1,6 +1,6 @@
 @use 'base/variables' as v;
 
-.contenido-resumnen{
+.contenido-resumen{
 
      p {
           margin-bottom: 1rem;
@@ -13,5 +13,11 @@
 }
 
 .contenedor-resumen{
+     padding: 3rem 0;
      border-bottom: 1px solid v.$gris;
+
+
+     &:last-of-type{
+          border-bottom: v.$separacion;
+     }
 }

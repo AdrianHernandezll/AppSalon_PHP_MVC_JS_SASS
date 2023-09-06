@@ -272,16 +272,36 @@ function mostrarResumen(){
     const nombreCliente = document.createElement('P');
     nombreCliente.innerHTML = `<span>Nombre:</span> ${nombre}`
 
+    //Formatear la hora
+
+    const fechaObj = new Date(fecha);
+    const mes = fechaObj.getMonth();
+    const dia = fechaObj.getDate() + 2;
+    const year = fechaObj.getFullYear();
+
+    const fechaUTC = new Date(Date.UTC(year,mes,dia));
+
+    const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'}
+    const fechaFormateada = fechaUTC.toLocaleDateString('es-AR', opciones)
+
     const fechaCita = document.createElement('P');
-    fechaCita.innerHTML = `<span>Fecha:</span> ${fecha}`
+    fechaCita.innerHTML = `<span>Fecha:</span> ${fechaFormateada}`
 
     const horaCita = document.createElement('P');
-    horaCita.innerHTML = `<span>Hora:</span> ${hora}`
+    horaCita.innerHTML = `<span>Hora:</span> ${hora} Horas`
 
+    //Heading para resumen
+
+    const headingServicios = document.createElement('H3');
+    headingServicios.textContent = 'Resumen de Servicios';
+    resumen.appendChild(headingServicios);
+
+
+    //Iterando y mostrasndo los servicios
     servicios.forEach(servicio => {
       const  {id,precio,nombre} = servicio;
       const contenedorServicio = document.createElement('DIV');
-      contenedorServicio.classList.add('contenedor-servicio');
+      contenedorServicio.classList.add('contenedor-resumen');
 
       const textoServicio = document.createElement('P');
       textoServicio.textContent = nombre;
@@ -296,6 +316,16 @@ function mostrarResumen(){
 
       
     })
+
+    const headingCita = document.createElement('H3');
+    headingCita.textContent = 'Resumen de Cita';
+    resumen.appendChild(headingCita);
+
+    //Boton para crear una Cita
+
+    const botonReservar = document.createElement('BUTTON');
+    botonReservar.classList.add('boton');
+    botonReservar.textContent = 'Reservar Cita';
 
 
     resumen.appendChild(nombreCliente);

@@ -326,12 +326,24 @@ function mostrarResumen(){
     const botonReservar = document.createElement('BUTTON');
     botonReservar.classList.add('boton');
     botonReservar.textContent = 'Reservar Cita';
+    botonReservar.onclick = reservarCita;
 
-
+    
     resumen.appendChild(nombreCliente);
     resumen.appendChild(fechaCita);
     resumen.appendChild(horaCita);
-   
+    
+    
+    resumen.appendChild(botonReservar);
+
+    function reservarCita(){
+
+      const datos = new FormData();
+
+      datos.append('nombre')
+
+      //console.log([...datos]);
+    }
 
 
 }

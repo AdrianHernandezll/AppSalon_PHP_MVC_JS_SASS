@@ -30,10 +30,10 @@
                </div>
 
           </form>
-          <?php echo date("Y-M-D"); ?>
+
 
      </div>
-     <div id="paso-3" class="seccion">
+     <div id="paso-3" class="seccion contenido-resumen">
           <h2>Resumen</h2>
           <p class="text-center">Verifica que la informacion sea correcta</p>
      </div>

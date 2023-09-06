@@ -23,7 +23,9 @@ function iniciarApp() {
   consultarAPI(); // Consultar API Al backend PHP
 
   nombreCliente(); //Agrega el no,bre de cliente al objeto de cita
-  sellecionarFecha(); //
+  sellecionarFecha(); // Agrega la fecha de la cita del objeto
+  seleccionarHora(); // Agrega la hora del objeto
+  mostrarResumen(); //Muestra el objeto lleno
 }
 
 function mostrarSeccion() {
@@ -59,6 +61,8 @@ function tabs() {
 
       mostrarSeccion();
       botonesPaginador();
+
+      
     });
   });
 }
@@ -73,6 +77,8 @@ function botonesPaginador(){
      }else if(paso === 3){
           paginaAnterior.classList.remove("ocultar");
           paginaSiguiente.classList.add("ocultar");
+
+          mostrarResumen();
      }else{
           paginaAnterior.classList.remove("ocultar");
           paginaSiguiente.classList.remove("ocultar");
@@ -170,9 +176,7 @@ function seleccionarServicio(servicio){
   }
 
   
-  
 
-  console.log(cita)
 }
 
 function nombreCliente(){
@@ -191,14 +195,34 @@ function sellecionarFecha(){
     
     if([6,0].includes(dia)){
       e.target.value = '';
-      mostrarAlerta('Fines de semana no permitidos','error');
+      mostrarAlerta('Fines de semana no permitidos','error', '.formulario');
     }else{
       cita.fecha = e.target.value;
     }
   })
 }
 
-function mostrarAlerta(mensaje, tipo){
+function seleccionarHora(){
+
+  const inputHora = document.querySelector('#hora');
+  inputHora.addEventListener('input', function(e){
+
+
+    const horaCita = e.target.value;
+    const hora = horaCita.split(":")[0];
+
+    if(hora < 10 || hora > 18){
+          e.target.value = '';
+          mostrarAlerta('Hora Invalida', 'error', '.formulario')
+    }else{
+      cita.hora = e.target.value;
+
+    }
+
+  })
+}
+
+function mostrarAlerta(mensaje, tipo, elemento, desaparece = true){
   //Previene clonacion de alerta
   const alertaPrevia = document.querySelector('.alerta');
   if(alertaPrevia) return;
@@ -208,13 +232,28 @@ function mostrarAlerta(mensaje, tipo){
   alerta.classList.add('alerta');
   alerta.classList.add(tipo);
 
-  const formulario = document.querySelector('#paso-2 p');
-  formulario.appendChild(alerta);
+  const referencia = document.querySelector(elemento);
+  referencia.appendChild(alerta);
 
-  //Eliminar alerta
-  setTimeout(() =>{
+  if(desaparece){
+    //Eliminar Alerta
+    setTimeout(() =>{
+      alerta.remove();
+    }, 3000)
+  }
 
-    alerta.remove();
-  }, 3000)
+}
+
+function mostrarResumen(){
+
+    const resumen = document.querySelector('.contenido-resumen');
+
+    if(Object.values(cita).includes("") || cita.servicios.length === 0){
+
+      mostrarAlerta('Faltan datos de Servicios, Fecha u Hora','error','.contenido-resumen')
+    }else{
+      console.log('Todo bien')
+    }
+
 }
 

@@ -3,6 +3,7 @@ const pasoInicial = 1;
 const pasoFinal = 3;
 
 const cita = {
+  id : '',
   nombre: '',
   fecha: '',
   hora: '',

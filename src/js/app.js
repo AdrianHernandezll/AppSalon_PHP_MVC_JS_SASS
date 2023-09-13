@@ -22,7 +22,7 @@ function iniciarApp() {
   paginaAnterior();
 
   consultarAPI(); // Consultar API Al backend PHP
-
+  idCliente();
   nombreCliente(); //Agrega el no,bre de cliente al objeto de cita
   sellecionarFecha(); // Agrega la fecha de la cita del objeto
   seleccionarHora(); // Agrega la hora del objeto
@@ -178,6 +178,9 @@ function seleccionarServicio(servicio){
 
   
 
+}
+function idCliente(){
+  cita.id = document.querySelector('#id').value;
 }
 
 function nombreCliente(){
@@ -339,16 +342,16 @@ function mostrarResumen(){
 
     async function reservarCita(){
 
-      const { nombre,fecha,hora,servicios} = cita;
+      const { nombre,fecha,hora,servicios,id} = cita;
 
       const idServicios = servicios.map(servicio => servicio.id);
 
       console.log(idServicios)
 
       const datos = new FormData();
-      datos.append('nombre', nombre)
       datos.append('fecha', fecha)
       datos.append('hora', hora)
+      datos.append('usuarioId', id)
       datos.append('servicios', idServicios)
       //Peticion hacia la API
 

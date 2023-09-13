@@ -355,7 +355,9 @@ function mostrarResumen(){
       datos.append('servicios', idServicios)
       //Peticion hacia la API
 
-      const url = 'http://localhost:3000/api/citas';
+      try {
+
+        const url = 'http://localhost:3000/api/citas';
 
       const respuesta = await fetch(url, {
         method: 'POST',
@@ -363,9 +365,34 @@ function mostrarResumen(){
       })
 
       const resultado = await respuesta.json();
-      console.log(resultado)
+      console.log(resultado.resultado)
 
-      console.log(respuesta)
+      if(resultado.resultado){
+        Swal.fire({
+          icon: 'success',
+          title: 'Cita Creada',
+          text: 'Tu cita fue creada correctammente',
+          button: 'OK'
+        }).then( () => {
+          setTimeout(() => {
+            window.location.reload();
+          },3000)
+        })
+      }
+        
+      } catch (error) {
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Hubo un error al guardar la cita'
+        })
+        
+      }
+
+      
+
+     
 
       //console.log([...datos]);
     }
